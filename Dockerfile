@@ -20,9 +20,9 @@ RUN apt-get install --no-install-recommends -y build-essential \
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-ENV keyboard=ergodox
-ENV subproject=ez
-ENV keymap=default
+ENV keyboard=planck
+ENV subproject=rev4
+ENV keymap=tj-anderson
 
 VOLUME /qmk
 WORKDIR /qmk
