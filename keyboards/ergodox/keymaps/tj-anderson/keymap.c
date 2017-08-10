@@ -3,9 +3,11 @@
 #include "action_layer.h"
 
 #define BASE 0 // default layer
-#define SYMB 1 // symbols
-#define CNTL 2 // control layer
-#define MOVE 3 // mouse layer
+#define HYPR 1 // hyper shortcut layer
+#define SYMB 2 // symbols
+#define CNTL 3 // control layer
+
+
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
@@ -17,13 +19,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   ~    |   1  |   2  |   3  |   4  |   5  |  MEH |           |   -  |   6  |   7  |   8  |   9  |   0  |   =    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   E  |   R  |   T  |  [   |           | ]    |  Y   |   U  |   I  |   O  |   P  | \ / L1 |
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |  [   |           | ]    |  Y   |   U  |   I  |   O  |   P  | \      |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |  Esc   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |  ;   | ' / L2 |
+ * |  Esc   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |  ;   | '      |
  * |--------+------+------+------+------+------|  {   |           | }    |------+------+------+------+------+--------|
  * | Shift  |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  |  Shift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | LCtl | LAlt | LGui | ShGu | AlGu |                                       | AlGu | ShGu | RGui | RAlt | L3/Ctl |
+ *   | LCtl | LAlt | LGui | ShGu | AlGu |                                       |  L2  |  L1  | RGui | RAlt | L3/Ctl |
  *   `----------------------------------'                                       `----------------------------------'
  *                                         ,-------------.       ,-------------.
  *                                         |  (   | Lead |       |  L1  |   )  |
@@ -47,23 +49,66 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                            KC_BSPC, KC_DELT,  LGUI(KC_SPC),
         // right hand
        KC_MINS,        KC_6,    KC_7,     KC_8,     KC_9,      KC_0,             KC_EQL,
-       KC_RBRC,        KC_Y,    KC_U,     KC_I,     KC_O,      KC_P,             LT(SYMB,KC_BSLS),
-                       KC_H,    KC_J,     KC_K,     KC_L,      KC_SCLN,          LT(CNTL,KC_QUOT),
+       KC_RBRC,        KC_Y,    KC_U,     KC_I,     KC_O,      KC_P,             KC_BSLS,
+                       KC_H,    KC_J,     KC_K,     KC_L,      KC_SCLN,          KC_QUOT,
        KC_RCBR,        KC_N,    KC_M,     KC_COMM,  KC_DOT,    KC_SLSH,          KC_RSFT,
-                                LALT(KC_LGUI), LSFT(KC_LGUI),  KC_RGUI,  KC_RALT,          LT(MOVE,KC_RCTL),
+                                MO(CNTL), MO(SYMB),  KC_RGUI,  KC_RALT,          LT(MOVE,KC_RCTL),
        KC_FN1,    KC_RPRN,
        LALT(KC_LGUI),
        LGUI(KC_SPC), KC_ENT, KC_SPC
     ),
+/* Keymap 0: Hyper layer
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |   ~    |   1  |   2  |   3  |   4  |   5  |  MEH |           |   -  |   6  |   7  |   8  |   9  |   0  |   =    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |  [   |           | ]    |  Y   |   U  |   I  |   O  |   P  | \      |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |  Esc   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |  ;   | '      |
+ * |--------+------+------+------+------+------|  {   |           | }    |------+------+------+------+------+--------|
+ * | Shift  |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  |  Shift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   | LCtl | LAlt | LGui | ShGu | AlGu |                                       |  L2  |  L1  | RGui | RAlt | L3/Ctl |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                         ,-------------.       ,-------------.
+ *                                         |  (   | Lead |       |  L1  |   )  |
+ *                                 ,-------|------|------|       |------+--------+------.
+ *                                 |       |      |ShfGui|       |AltGui|       |       |
+ *                                 | BkSpc |  Del |------|       |------| Enter | Space |
+ *                                 |       |      |CmdSpc|       |CmdSpc|       |       |
+ *                                 `--------------------'       `-----------------------'
+ */
+// If it accepts an argument (i.e, is a function), it doesn't need KC_.
+// Otherwise, it needs KC_*
+[HYPR] = KEYMAP(  // layer 0 : default
+        // left hand
+        HYPR(KC_GRV),    HYPR(KC_1),    HYPR(KC_2),    HYPR(KC_3),    HYPR(KC_4),    HYPR(KC_5),   _______,
+        _______,         HYPR(KC_Q),    HYPR(KC_W),    HYPR(KC_E),    HYPR(KC_R),    HYPR(KC_T),   HYPR(KC_LBRC),
+        LT(HYPR,KC_ESC), HYPR(KC_A),    HYPR(KC_S),    HYPR(KC_D),    HYPR(KC_F),    HYPR(KC_G),
+        _______,         HYPR(KC_Z),    KC_DELT,       HYPR(KC_C),    HYPR(KC_V),    HYPR(KC_B),   HYPR(KC_LCBR),
+        _______,         _______,       _______,       _______,       _______,
+                                                             HYPR(KC_LPRN),   _______,
+                                                                              _______,
+                                                           _______, _______,  _______,
+        // right hand
+       HYPR(KC_MINS),  HYPR(KC_6),    HYPR(KC_7),     HYPR(KC_8),     HYPR(KC_9),      HYPR(KC_0),      HYPR(KC_EQL),
+       HYPR(KC_RBRC),  HYPR(KC_Y),    HYPR(KC_U),     HYPR(KC_I),     HYPR(KC_O),      HYPR(KC_P),      HYPR(KC_BSLS),
+                       KC_LEFT,       KC_DOWN,        KC_UP,          KC_RIGHT,        HYPR(KC_SCLN),   HYPR(KC_QUOT),
+       HYPR(KC_RCBR),  HYPR(KC_N),    HYPR(KC_M),     HYPR(KC_COMM),  HYPR(KC_DOT),    HYPR(KC_SLSH),   _______,
+                                      MO(CNTL),       MO(SYMB),       _______,         _______,         _______,
+       _______,    HYPR(KC_RPRN),
+       _______,
+       _______, _______, HYPR(KC_SPC)
+    ),
 /* Keymap 1: Symbol Layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |  F1  |  F2  |  F3  |  F4  |  F5  | F6   |           |  F7  |  F8  |  F9  | F10  | F11  |  F12 |        |
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      | F14  |           |  F15 |      |      |      |      |      |        |
+ * |        |      |      |      |      |      | F11  |           |  F12 |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------|  F14 |           |  F15 |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |       |
@@ -79,19 +124,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
-       _______,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,
-       _______,_______,_______,  _______,_______,_______,KC_F14,
+       _______,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  _______,
+       _______,_______,_______,  _______,_______,_______,KC_F11,
        _______,_______,_______, _______,_______,_______,
-       _______,_______,_______,_______,_______,_______,_______,
+       _______,_______,_______,_______,_______,_______,KC_F14,
        _______,_______,_______,_______,_______,
                                        _______,_______,
                                                _______,
                                _______,_______,_______,
        // right hand
-       KC_F6,    KC_F7,   KC_F8,     KC_F9,     KC_F10,     KC_F11,     KC_F12,
-       KC_F15,    _______, _______,   _______,    _______,   _______,    _______,
+       _______,    KC_F6,   KC_F7,     KC_F8,     KC_F9,     KC_F10,     _______,
+       KC_F12,    _______, _______,   _______,    _______,   _______,    _______,
                    _______, _______,     _______,   _______,    _______,    _______,
-       _______,    _______, _______,   _______,   _______,   _______,    _______,
+       KC_F15,    _______, _______,   _______,   _______,   _______,    _______,
                             _______,   _______,  _______,    _______, _______,
        _______, _______,
        _______,
@@ -139,47 +184,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        _______,
        _______, _______, _______
 ),
-/* Keymap 3: Mouse Layer
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght| Lclk |------|           |------|  Left| Down |  Up  | Right|      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |MsDown|      | Rclk |      |           |      |      |      |      |      |      |        |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |      |      |      |      |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |      |
- *                                 |      |      |------|       |------|      |      |
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-// Mouse
-[MOVE] = KEYMAP(
-       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-       _______, XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, XXXXXXX, XXXXXXX,
-       _______, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1,
-       _______, XXXXXXX, XXXXXXX, KC_MS_D, XXXXXXX, KC_BTN2, XXXXXXX,
-       _______, _______, _______, _______, _______,
-                                           _______, _______,
-                                                    _______,
-                                  _______, _______, _______,
-    // right hand
-       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX,
-       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                 KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,     XXXXXXX, _______,
-       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, _______,
-                          _______,  _______, _______,     _______, _______,
-       _______, _______,
-       _______,
-       _______, _______, _______
-),
 
 };
 
@@ -221,18 +225,15 @@ void matrix_scan_user(void) {
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
         case 1:
+            ergodox_right_led_1_on();
             ergodox_right_led_2_on();
+            ergodox_right_led_3_on();
             break;
         case 2:
-            ergodox_right_led_3_on();
+            ergodox_right_led_2_on();
             break;
         case 3:
           ergodox_right_led_1_on();
-          break;
-        case 4:
-          ergodox_right_led_1_on();
-          ergodox_right_led_2_on();
-          ergodox_right_led_3_on();
           break;
         default:
             // none
