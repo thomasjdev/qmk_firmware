@@ -25,4 +25,4 @@ ENV keymap=tj-anderson
 
 VOLUME /qmk
 WORKDIR /qmk
-CMD make clean; make;
+CMD make clean ; make keyboard=${keyboard} subproject=${subproject} keymap=${keymap}
