@@ -16,21 +16,23 @@ extern keymap_config_t keymap_config;
 // entirely and just use numbers.
 #define _QWERTY 0
 #define _COLEMAK 1
-#define _NUMPAD 2
+#define _HYP 2
 #define _LOWER 3
 #define _RAISE 4
-#define _PLOVER 5
+#define _CUSTOM 5
 #define _ADJUST 16
+
+#define HYP_ESC LT(_HYP, KC_ESC)
+#define CUST_TAB LT(_CUSTOM, KC_TAB)
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
-  NUMPAD,
-  PLOVER,
+  HYP,
   LOWER,
   RAISE,
-  BACKLIT,
-  EXT_PLV
+  CUSTOM,
+  BACKLIT
 };
 
 // Fillers to make layering more clear
@@ -41,59 +43,95 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,--------------------------------------------------------------------------------------.
- * | Hyp/Tab |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  \   |
+ * |     Tab |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |---------+------+------+------+------+-------------+------+------+------+------+------|
  * | Esc     |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
  * |---------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift   |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |---------+------+------+------+------+------+------+------+------+------+------+------|
- * | Numpd   | Ctrl | Alt  | GUI  |Lower | Bksp |Space |Raise |cmdsp | Cmd` | hypr | Num  |
+ * | CmdSp   | Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Cust | Cmd` | hypr |Cmdsp |
  * `--------------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {ALL_T(KC_TAB),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS},
-  {CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {KC_LSFT,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {NUMPAD,        KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_BSPC,  KC_SPC,  RAISE,   LGUI(KC_SPC), LGUI(KC_GRV), KC_HYPR,   NUMPAD}
+  {CUST_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS},
+  {HYP_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+  {KC_LSFT,  CTL_T(KC_Z),    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {LGUI(KC_SPC), KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_BSPC,  KC_SPC,  RAISE,   CUSTOM, LGUI(KC_GRV), KC_HYPR,   LGUI(KC_SPC)}
 },
 
 /* Colemak
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
+ * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  |  \   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Esc  |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
+ * | CmdSp| Ctrl | Alt  | GUI  |Lower |    Space    |Raise |Custm | Cmd` | hypr |CmdSp |
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = {
-  {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
-  {KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS},
+  {HYP_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
+  {KC_LSFT, CTL_T(KC_Z),    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {LGUI(KC_SPC), KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_BSPC,  KC_SPC,  RAISE,   CUSTOM, LGUI(KC_GRV), KC_HYPR,   LGUI(KC_SPC)}
+},
+
+/* Hyp
+ * ,--------------------------------------------------------------------------------------.
+ * |     Tab |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |  \   |
+ * |---------+------+------+------+------+-------------+------+------+------+------+------|
+ * | Esc     |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * |---------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Shift   |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |---------+------+------+------+------+------+------+------+------+------+------+------|
+ * | CmdSp   | Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Cust | Cmd` | hypr |Cmdsp |
+ * `--------------------------------------------------------------------------------------'
+ */
+[_HYP] = {
+  {_______, HYPR(KC_Q), HYPR(KC_W), HYPR(KC_E), HYPR(KC_R), HYPR(KC_T), HYPR(KC_Y), HYPR(KC_U), HYPR(KC_I),    HYPR(KC_O),   HYPR(KC_P),    HYPR(KC_BSLS)},
+  {_______, HYPR(KC_A), HYPR(KC_S), HYPR(KC_D), HYPR(KC_F), HYPR(KC_G), KC_LEFT,    KC_DOWN,    KC_UP,         KC_RIGHT,     HYPR(KC_SCLN), HYPR(KC_QUOT)},
+  {_______, HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_V), HYPR(KC_B), HYPR(KC_N), HYPR(KC_M), HYPR(KC_COMM), HYPR(KC_DOT), HYPR(KC_SLSH), _______},
+  {_______, _______, _______, _______, _______, HYPR(KC_SPC), HYPR(KC_SPC), _______, _______, _______, _______, _______}
 },
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
- * |   ~  |  F9  |  F10 | F11  | F12  |      |      |      |   *  |   (  |   )  | Cmd~ |
+ * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Ent  |  F5  |  F6  |  F7  |  F8  |      |      |   -  |   +  |   {  |   }  |  |   |
+ * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  F1  |  F2  |  F3  |  F4  |      |      |   _  |   =  |   [  |  ]   | Mute |
+ * |      |  F7  |  F8  |  F9  | F10  | F11  |  F12 |   _  |   =  |   [  |  ]   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      | Bksp |  Del |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |             |      | Mute | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {KC_TILD, KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, LGUI(KC_GRV)},
-  {KC_ENT,  KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,   _______,   KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
-  {_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,  _______,  _______,  KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, KC_MUTE},
-  {_______, _______, _______, _______, _______, KC_BSPC, KC_DELT, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC},
+  {KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
+  {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_UNDS, KC_EQL,  KC_LBRC, KC_RBRC, _______},
+  {_______, _______, _______, _______, _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 
 /* Raise
+ * ,-----------------------------------------------------------------------------------.
+ * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 | Mute | Prev | Next | Play |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |             |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_RAISE] = {
+  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC},
+  {KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS},
+  {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_MUTE, KC_MPRV, KC_MNXT, KC_MPLY, _______},
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
+},
+
+/* Custom
  * ,-----------------------------------------------------------------------------------.
  * |   `  |      |      | Scrn3| Scrn4|      | end  | pgdn | pgup | home |   |  | Cmd~ |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -104,53 +142,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      | Bksp |  Del |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
-[_RAISE] = {
-  {KC_GRV,  _______,    LGUI(KC_W),    LGUI(S(KC_3)), LGUI(S(KC_4)),    _______, KC_END,       KC_PGDN,       KC_PGUP,      KC_HOME,       KC_PIPE, LGUI(KC_GRV)},
-  {_______, LGUI(LALT(KC_LEFT)),    LGUI(LALT(KC_RIGHT)),    _______,          LGUI(LALT(KC_F)), _______, KC_LEFT,       KC_DOWN,       KC_UP,         KC_RIGHT,      KC_BSLS, KC_ENT},
-  {_______, LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C),       LGUI(KC_V),       _______, LGUI(KC_LCBR), LGUI(KC_RCBR), LGUI(KC_LBRC), LGUI(KC_RBRC), KC_SLSH, KC_MUTE},
-  {_______, _______, _______, _______, _______,       KC_BSPC,          KC_DELT, _______,       KC_MNXT,       KC_VOLD,       KC_VOLU,       KC_MPLY}
-},
-/* Numpad
- * ,-----------------------------------------------------------------------------------.
- * |      |   (  |  )   |   {  |  }   |   [  |   ]  |      |   7  |   8  |   9  |  0   |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   %  |   ^  |   &  |   *  |   <  |   >  |  ~   |   4  |   5  |   6  | Ent  |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |   !  |   @  |   #  |  $   |   |  |   \  |  /   |   1  |   2  |  3   |   =  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      | Bksp |  Del |      |   -  |   +  |      |      |
- * `-----------------------------------------------------------------------------------'
- */
-[_NUMPAD] = {
-  {_______, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, _______, KC_7, KC_8, KC_9, KC_0},
-  {_______, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LABK, KC_RABK, KC_TILD, KC_4, KC_5, KC_6, KC_ENT},
-  {_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PIPE, KC_BSLS, KC_GRV,  KC_1, KC_2, KC_3, KC_EQL},
-  {_______, _______, _______, _______, _______, KC_BSPC, KC_DELT, _______, KC_MINS, KC_PLUS, _______, _______}
-},
-/* Plover layer (http://opensteno.org)
- * ,-----------------------------------------------------------------------------------.
- * |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   S  |   T  |   P  |   H  |   *  |   *  |   F  |   P  |   L  |   T  |   D  |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |TogOut|   S  |   K  |   W  |   R  |   *  |   *  |   R  |   B  |   G  |   S  |   Z  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Exit |      |      |   A  |   O  |             |   E  |   U  |      |      |      |
- * `-----------------------------------------------------------------------------------'
- */
-
-[_PLOVER] = {
-  {KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1   },
-  {XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC},
-  {XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX}
+[_CUSTOM] = {
+  {_______, _______,             LGUI(KC_W),           LGUI(S(KC_3)), LGUI(S(KC_4)),    _______, KC_END,        KC_PGDN,       KC_PGUP,       KC_HOME,       KC_PIPE, LGUI(KC_GRV)},
+  {_______, LGUI(LALT(KC_LEFT)), LGUI(LALT(KC_RIGHT)), _______,       LGUI(LALT(KC_F)), _______, KC_LEFT,       KC_DOWN,       KC_UP,         KC_RIGHT,      KC_BSLS, KC_MUTE},
+  {_______, LGUI(KC_Z),          LGUI(KC_X),           LGUI(KC_C),    LGUI(KC_V),       _______, LGUI(KC_LCBR), LGUI(KC_RCBR), LGUI(KC_LBRC), LGUI(KC_RBRC), KC_SLSH, _______},
+  {_______, _______, _______, _______, _______,       KC_BSPC,          KC_DELT, _______,       _______,       _______,       _______,       _______}
 },
 
 /* Adjust (Lower + Raise)
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |Aud on|Audoff|      |      |Qwerty|Colemk|      |Plover|      |
+ * |      |      |      |Aud on|Audoff|      |      |Qwerty|Colemk|      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -159,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = {
   {_______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL},
-  {_______, _______, _______, AU_ON,   AU_OFF,  _______, _______, QWERTY,  COLEMAK, _______,  PLOVER,  _______},
+  {_______, _______, _______, AU_ON,   AU_OFF,  _______, _______, QWERTY,  COLEMAK, _______,  _______,  _______},
   {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
@@ -171,38 +174,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 float tone_startup[][2]    = SONG(STARTUP_SOUND);
 float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
 float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-float tone_plover[][2]     = SONG(PLOVER_SOUND);
-float tone_plover_gb[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
-
 float tone_goodbye[][2] = SONG(GOODBYE_SOUND);
 #endif
-
-
-void persistant_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
+          PLAY_SONG(tone_qwerty);
         #endif
-        persistant_default_layer_set(1UL<<_QWERTY);
+        set_single_persistent_default_layer(_QWERTY);
       }
       return false;
       break;
     case COLEMAK:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_colemak, false, 0);
+          PLAY_SONG(tone_colemak);
         #endif
-        persistant_default_layer_set(1UL<<_COLEMAK);
+      set_single_persistent_default_layer(_COLEMAK);
       }
       return false;
       break;
@@ -226,11 +219,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NUMPAD:
+    case CUSTOM:
       if (record->event.pressed) {
-        layer_on(_NUMPAD);
+        layer_on(_CUSTOM);
       } else {
-        layer_off(_NUMPAD);
+        layer_off(_CUSTOM);
+      }
+      return false;
+      break;
+    case HYP:
+      if (record->event.pressed) {
+        layer_on(_HYP);
+      } else {
+        layer_off(_HYP);
       }
       return false;
       break;
@@ -242,34 +243,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #endif
       } else {
         unregister_code(KC_RSFT);
-      }
-      return false;
-      break;
-    case PLOVER:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          stop_all_notes();
-          PLAY_NOTE_ARRAY(tone_plover, false, 0);
-        #endif
-        layer_off(_RAISE);
-        layer_off(_LOWER);
-        layer_off(_ADJUST);
-        layer_on(_PLOVER);
-        if (!eeconfig_is_enabled()) {
-            eeconfig_init();
-        }
-        keymap_config.raw = eeconfig_read_keymap();
-        keymap_config.nkro = 1;
-        eeconfig_update_keymap(keymap_config.raw);
-      }
-      return false;
-      break;
-    case EXT_PLV:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_plover_gb, false, 0);
-        #endif
-        layer_off(_PLOVER);
       }
       return false;
       break;
@@ -288,12 +261,12 @@ void matrix_init_user(void) {
 void startup_user()
 {
     _delay_ms(20); // gets rid of tick
-    PLAY_NOTE_ARRAY(tone_startup, false, 0);
+    PLAY_SONG(tone_startup);
 }
 
 void shutdown_user()
 {
-    PLAY_NOTE_ARRAY(tone_goodbye, false, 0);
+    PLAY_SONG(tone_goodbye);
     _delay_ms(150);
     stop_all_notes();
 }
@@ -305,7 +278,7 @@ void music_on_user(void)
 
 void music_scale_user(void)
 {
-    PLAY_NOTE_ARRAY(music_scale, false, 0);
+    PLAY_SONG(music_scale);
 }
 
 #endif
