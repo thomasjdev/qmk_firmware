@@ -32,18 +32,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   `    |   1  |   2  |   3  |   4  |   5  | LEFT |           | RIGHT|   6  |   7  |   8  |   9  |   0  |    =   |
+ * |   `    |   1  |   2  |   3  |   4  |   5  |  L1  |           |  L1  |   6  |   7  |   8  |   9  |   0  |    =   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   F  |   P  |   G  |  L1  |           |  L1  |   J  |   L  |   U  |   Y  |   ;  |   \    |
+ * | Tab    |   Q  |   W  |   F  |   P  |   G  |   -  |           |   _  |   J  |   L  |   U  |   Y  |   ;  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | Ctl/Esc|   A  |   R  |   S  |   T  |   D  |------|           |------|   H  |   N  |   E  |   I  |  O   |   '    |
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   K  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  FN   |  Ct  |  Alt | Gui  | Move |                                       | Move |  -  |  Dn  |  Up  |  FN  |
+ *   |  Ct   |  FN  |  Ctl | Alt  | Gui |                                       | Move | Meh |  Dn  |  Up  |  FN  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |   (  |  {   |       |   }  |   )  |
+ *                                        |   {  |   (  |       |   )  |   }  |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      |  <   |       |   >  |        |      |
  *                                 |BkSpc |  Del |------|       |------|  Ent   |  Spc |
@@ -54,41 +54,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_LEFT,
-        KC_TAB,        KC_Q,         KC_W,   KC_F,   KC_P,   KC_G,   TG(QWERTY),
+        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   TG(QWERTY),
+        KC_TAB,        KC_Q,         KC_W,   KC_F,   KC_P,   KC_G,   KC_MINS,
         CTL_ESC,        KC_A,         KC_R,   KC_S,   KC_T,   KC_D,
-        KC_LSPO,        CTL_Z,        ALT_X,   GUI_C,   KC_V,   KC_B,   KC_LCBR,
-        KC_FNL,         KC_LCTL,      KC_LALT,  KC_LGUI,KC_MOVE,
-                                                     KC_LPRN,  KC_LCBR,
+        KC_LSFT,        CTL_Z,        ALT_X,   GUI_C,   KC_V,   KC_B,   KC_LBRC,
+        KC_LCTL,         KC_FNL,      KC_LCTL,  KC_LALT, KC_LGUI,
+                                                     KC_LCBR,  KC_LPRN,
                                                                KC_LABK,
                                                KC_BSPC,KC_DELT,GUI_SPC,
         // right hand
-             KC_RGHT,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_EQL,
-             TG(QWERTY),  KC_J,   KC_L,  KC_U,   KC_Y,   KC_SCLN,          KC_BSLS,
+             TG(QWERTY),     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_EQL,
+             KC_UNDS,  KC_J,   KC_L,  KC_U,   KC_Y,   KC_SCLN,          KC_BSLS,
                           KC_H,   KC_N,  KC_E,   KC_I,   KC_O,     KC_QUOT,
-             KC_RBRC,     KC_K,   KC_M,  GUI_COMM, ALT_P,      CTL_SLSH,   KC_RSPC,
-                                  KC_MOVE, KC_MINS,KC_DOWN,KC_UP,          KC_FNL,
-             KC_RCBR,  KC_RPRN,
+             KC_RBRC,     KC_K,   KC_M,  GUI_COMM, ALT_P,      CTL_SLSH,   KC_RSFT,
+                                  KC_MOVE, KC_MEH,KC_DOWN,KC_UP,          KC_FNL,
+             KC_RPRN,  KC_RCBR,
              KC_RABK,
              GUI_SPC,KC_ENT, KC_SPC
     ),
 [QWERTY] = LAYOUT_ergodox(  // layer 1 : default
         // left hand
-        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_LEFT,
-        KC_TAB,        KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   TG(QWERTY),
+        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   TG(QWERTY),
+        KC_TAB,        KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_MINS,
         CTL_ESC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSPO,        CTL_Z,        ALT_X,   GUI_C,   KC_V,   KC_B,   KC_LCBR,
-        KC_FNL,         KC_LCTL,      KC_LALT,  KC_LGUI,KC_MOVE,
-                                                     KC_LPRN,  KC_LCBR,
+        KC_LSFT,        CTL_Z,        ALT_X,   GUI_C,   KC_V,   KC_B,   KC_LBRC,
+        KC_LCTL,         KC_FNL,      KC_LCTL,  KC_LALT, KC_LGUI,
+                                                     KC_LCBR,  KC_LPRN,
                                                                KC_LABK,
                                                KC_BSPC,KC_DELT,GUI_SPC,
         // right hand
-             KC_RGHT,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_EQL,
-             TG(QWERTY),  KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
+             TG(QWERTY),     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_EQL,
+             KC_UNDS,  KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
                           KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,     KC_QUOT,
-             KC_RBRC,     KC_N,   KC_M,  GUI_COMM,ALT_P,      CTL_SLSH,   KC_RSPC,
-                                  KC_MOVE, KC_MINS,KC_DOWN,KC_UP,          KC_FNL,
-             KC_RCBR,  KC_RPRN,
+             KC_RBRC,     KC_N,   KC_M,  GUI_COMM,ALT_P,      CTL_SLSH,   KC_RSFT,
+                                  KC_MOVE, KC_MEH,KC_DOWN,KC_UP,          KC_FNL,
+             KC_RPRN,  KC_RCBR,
              KC_RABK,
              GUI_SPC,KC_ENT, KC_SPC
     ),
