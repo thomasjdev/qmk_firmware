@@ -5,9 +5,14 @@ pipeline {
       }
 }
     stages {
-        stage('Test') {
+        stage('Build Planck') {
             steps {
-                echo 'Starting build'
+                sh 'make planck/rev4:tj-anderson'
+            }
+        }
+        stage('Build Ergodox') {
+            steps {
+                sh 'make ergodox_ez:tj-anderson'
             }
         }
     }
