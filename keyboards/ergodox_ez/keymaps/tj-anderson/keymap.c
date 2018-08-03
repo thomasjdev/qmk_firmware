@@ -25,7 +25,7 @@ enum custom_keycodes {
 #define KC_FNL      MO(FN)
 #define KC_MOVE     MO(MOVE)
 #define CUST_TAB LT(MOVE, KC_TAB)
-#define CUST_GRV LT(FC,KC_GRV)
+#define CUST_GRV LT(FN, KC_GRV)
 #define ALT_G LALT(KC_LGUI)
 #define GUI_S LGUI(KC_LSFT)
 #define CUST_SPC LT(MOVE, KC_SPC)
