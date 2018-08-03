@@ -24,9 +24,11 @@ enum custom_keycodes {
 #define HYP_ESC     ALL_T(KC_ESC)
 #define KC_FNL      MO(FN)
 #define KC_MOVE     MO(MOVE)
-#define CUST_TAB LT(FN, KC_TAB)
+#define CUST_TAB LT(MOVE, KC_TAB)
+#define CUST_GRV LT(FC,KC_GRV)
 #define ALT_G LALT(KC_LGUI)
 #define GUI_S LGUI(KC_LSFT)
+#define CUST_SPC LT(MOVE, KC_SPC)
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
@@ -36,16 +38,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   `    |   1  |   2  |   3  |   4  |   5  |   _  |           |  -   |   6  |   7  |   8  |   9  |   0  |    =   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   W  |   F  |   P  |   G  |   {  |           |   }  |   J  |   L  |   U  |   Y  |   ;  |   \    |
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |   {  |           |   }  |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | Hyp/Esc|   A  |   R  |   S  |   T  |   D  |------|           |------|   H  |   N  |   E  |   I  |  O   |   '    |
+ * | Hyp/Esc|   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
  * |--------+------+------+------+------+------|  [   |           |  ]   |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   K  |   M  |   ,  |   .  |   /  | RShift |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  Ct  |  AG  |  GS  | Alt  |  Gui |                                       | Move | G+S  |  GS  |  AG  |  FN  |
+ *   |  Ct  |  AG  |  GS  | Alt  |  Gui |                                       |  Gui | G+S  |  GS  |  AG  |  FN  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |   (  |   _  |       |   -  |   )  |
+ *                                        |   _  |   (  |       |   )  |   -  |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      |  <   |       |   >  |        |      |
  *                                 |BkSpc |  Del |------|       |------|  Ent   |  Spc |
@@ -56,23 +58,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_UNDS,
-        CUST_TAB,        KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_LCBR,
-        HYP_ESC,        KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSPO,        CTL_Z,        ALT_X,   GUI_C,   KC_V,   KC_B,   KC_LBRC,
-        KC_LCTL,         ALT_G,      GUI_S,  KC_LALT, KC_LGUI,
-                                                     KC_LPRN,  KC_UNDS,
-                                                               KC_LABK,
-                                               KC_BSPC,KC_DELT,GUI_SPC,
+        CUST_GRV,       KC_1,         KC_2,      KC_3,      KC_4,     KC_5,   KC_UNDS,
+        CUST_TAB,       KC_Q,         KC_W,      KC_E,      KC_R,     KC_T,   KC_LCBR,
+        HYP_ESC,        KC_A,         KC_S,      KC_D,      KC_F,     KC_G,
+        KC_LSPO,        CTL_Z,        ALT_X,     GUI_C,     KC_V,     KC_B,   KC_LBRC,
+        KC_LCTL,        ALT_G,        GUI_S,     KC_LALT,   KC_LGUI,
+                                                                    KC_UNDS,  KC_LPRN,
+                                                                              KC_LABK,
+                                                              KC_BSPC,KC_DELT,GUI_SPC,
         // right hand
-             KC_MINS,     KC_6,   KC_7,  KC_8,   KC_9,   KC_0,             KC_EQL,
-             KC_RCBR,  KC_Y,   KC_U,  KC_I,   KC_O,   KC_P,             KC_BSLS,
-                          KC_H,   KC_J,  KC_K,   KC_L,   KC_SCLN,     KC_QUOT,
-             KC_RBRC,     KC_N,   KC_M,  GUI_COMM,ALT_P,      CTL_SLSH,   KC_RSPC,
-                                  KC_MOVE, GUI_SPC, GUI_S, ALT_G,          KC_FNL,
-             KC_MINS,  KC_RPRN,
+             KC_MINS,     KC_6,   KC_7,      KC_8,        KC_9,     KC_0,          KC_EQL,
+             KC_RCBR,     KC_Y,   KC_U,      KC_I,        KC_O,     KC_P,          KC_BSLS,
+                          KC_H,   KC_J,      KC_K,        KC_L,     KC_SCLN,       KC_QUOT,
+             KC_RBRC,     KC_N,   KC_M,      GUI_COMM,    ALT_P,    CTL_SLSH,      KC_RSPC,
+                                  KC_RGUI,   GUI_SPC,     GUI_S,    ALT_G,          KC_FNL,
+             KC_RPRN,  KC_MINS,
              KC_RABK,
-             GUI_SPC,KC_ENT, KC_SPC
+             GUI_SPC,KC_ENT, CUST_SPC
     ),
 /* Keymap 1: Move & Control Layer
  *
