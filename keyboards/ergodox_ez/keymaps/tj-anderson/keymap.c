@@ -29,6 +29,7 @@ enum custom_keycodes {
 #define ALT_G LALT(KC_LGUI)
 #define GUI_S LGUI(KC_LSFT)
 #define CUST_SPC LT(MOVE, KC_SPC)
+#define CUST_GUI LT(MOVE, KC_LGUI)
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
@@ -71,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_RCBR,     KC_Y,   KC_U,      KC_I,        KC_O,     KC_P,          KC_BSLS,
                           KC_H,   KC_J,      KC_K,        KC_L,     KC_SCLN,       KC_QUOT,
              KC_RBRC,     KC_N,   KC_M,      GUI_COMM,    ALT_P,    CTL_SLSH,      KC_RSPC,
-                                  KC_RGUI,   GUI_SPC,     GUI_S,    ALT_G,          KC_FNL,
+                                  CUST_GUI,   GUI_SPC,     GUI_S,    ALT_G,          KC_FNL,
              KC_RPRN,  KC_MINS,
              KC_RABK,
              GUI_SPC,KC_ENT, CUST_SPC
