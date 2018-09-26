@@ -19,10 +19,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y build-essential
     avrdude \
     && rm -rf /var/lib/apt/lists/*
 
-ENV keyboard=planck
-ENV subproject=rev4
-ENV keymap=tj-anderson
-
 VOLUME /qmk
 WORKDIR /qmk
 CMD make clean ; make keyboard=${keyboard} subproject=${subproject} keymap=${keymap}
