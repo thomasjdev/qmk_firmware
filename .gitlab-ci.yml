@@ -1,0 +1,10 @@
+image: docker:stable
+
+before_script:
+  - docker info
+
+build:
+  stage: build
+  script:
+    - docker build -t qmk_firmware .
+    - docker run qmk_firmware 'make ergodox_ez:tj-anderson'
