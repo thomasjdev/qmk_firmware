@@ -18,3 +18,9 @@ build:
     - docker build --cache-from $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_SHA --tag $CONTAINER_IMAGE:latest .
     - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
     - docker push $CONTAINER_IMAGE:latest
+
+ergodox:
+  stage: build
+  script:
+    - docker pull $CONTAINER_IMAGE:$CI_COMMIT_SHA
+    - docker run $CONTAINER_IMAGE:$CI_COMMIT_SHA 'make ergodox_ez:tj-anderson'
