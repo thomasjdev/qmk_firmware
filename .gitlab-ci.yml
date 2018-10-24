@@ -4,3 +4,6 @@ ergodox:
   stage: build
   script:
     - make ergodox_ez:tj-anderson
+  artifacts:
+    paths:
+      - ./*.hex
