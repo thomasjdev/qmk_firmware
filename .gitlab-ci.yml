@@ -1,17 +1,14 @@
-image: docker:stable
-
-services:
-  - docker:dind
-
 variables:
   CONTAINER_IMAGE: $CONTAINER_REGISTRY/$CI_PROJECT_PATH
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
 
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CONTAINER_REGISTRY
-
 build:
+  image: docker:stable
+  before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CONTAINER_REGISTRY
+  services:
+  - docker:dind
   stage: build
   script:
     - docker pull $CONTAINER_IMAGE:latest || true
