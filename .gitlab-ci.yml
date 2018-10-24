@@ -20,7 +20,6 @@ ergodox:
   image: $CONTAINER_IMAGE:latest
   stage: build
   script:
-    - cat keyboards/ergodox_ez/keymaps/tj-anderson/keymap.c
     - make ergodox_ez:tj-anderson
   artifacts:
     paths:
