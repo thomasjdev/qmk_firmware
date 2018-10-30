@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_RPRN, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLS,
         KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,
         KC_RCBR, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-        KC_MOVE, KC_PGUP, KC_PGDN, KC_HOME, CUST_END,
+        KC_MOVE, KC_FNL, KC_RGUI, KC_RALT, KC_RCTL,
         KC_MINS, KC_RBRC,
         KC_RABK,
         GUI_SPC, KC_ENT, KC_SPC),
@@ -116,10 +116,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * |         |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |         |      |      |      |      |      |   <  |           |   >  |      |      |      |      |      |   F12  |
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |   F12  |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |      |      |      |      |------|           |------|   L  |   D  |   U  |   R  |      |   F14  |
- * |---------+------+------+------+------+------|   [  |           |   ]  |------+------+------+------+------+--------|
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |      |      |      |      |      |           |      | Mute | Play | Vol+ | Vol -| Prev |   F15  |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
@@ -136,18 +136,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [FN] = LAYOUT_ergodox(
         // left hand
         KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LABK,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LBRC,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_PGDN, KC_PGUP,
         KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS,
         // right hand
         KC_TRNS, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-        KC_RABK, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MPLY, KC_F12,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MPLY, KC_F12,
         KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_TRNS, KC_F14,
-        KC_LBRC, KC_MUTE, KC_MPLY, KC_VOLU, KC_VOLD, KC_MNXT, KC_F15,
+        KC_TRNS, KC_MUTE, KC_MPLY, KC_VOLU, KC_VOLD, KC_MNXT, KC_F15,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_HOME, KC_END,
         KC_TRNS,
