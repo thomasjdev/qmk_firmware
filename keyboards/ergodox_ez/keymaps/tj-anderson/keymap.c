@@ -15,16 +15,9 @@ enum custom_keycodes {
 };
 
 #define GUI_SPC     LGUI(KC_SPC)
-#define HYP_ESC     ALL_T(KC_ESC)
 #define KC_FNL      MO(FN)
 #define KC_MOVE     MO(MOVE)
-#define CUST_TAB LT(MOVE, KC_TAB)
-#define CUST_GRV LT(FN, KC_GRV)
-#define ALT_G LALT(KC_LGUI)
-#define GUI_S LGUI(KC_LSFT)
-#define CUST_SPC LT(MOVE, KC_SPC)
-#define CUST_GUI LT(MOVE, KC_LGUI)
-#define CUST_END LT(FN,KC_END)
+
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
@@ -54,9 +47,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Otherwise, it needs KC_*
     [BASE] = LAYOUT_ergodox( // layer 0 : default
         // left hand
-        CUST_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_UNDS,
-        CUST_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LPRN,
-        HYP_ESC, KC_A, KC_S, KC_D, KC_F, KC_G,
+        KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_UNDS,
+        KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LPRN,
+        KC_ESC, KC_A, KC_S, KC_D, KC_F, KC_G,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_LCBR,
         KC_LCTL, KC_LALT, KC_LGUI, KC_FNL, KC_MOVE,
         KC_LBRC, KC_UNDS,
