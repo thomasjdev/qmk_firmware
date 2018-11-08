@@ -69,11 +69,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |     [   |      |   7  |   8  |   9  |      |      |           |      |      |      |      |      |      |    ]   |
+ * |         |      |   7  |   8  |   9  |      |      |           |      |      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |     {   |      |   4  |   5  |   6  |      |------|           |------|   L  |   D  |  U   |   R  |      |    }   |
+ * |     [   |   {  |   4  |   5  |   6  |      |------|           |------|   L  |   D  |  U   |   R  |   }  |    ]   |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |     (    |      |   1  |   2  |   3  |  0  |      |           |      |      |      |      |      |      |    )   |
+ * |         |   (  |   1  |   2  |   3  |  0   |      |           |      |      |      |      |      |   )  |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -87,19 +87,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [MOVE] = LAYOUT_ergodox(
         // left hand
-        KC_TRNS, LCTL(LGUI(S(KC_3))), LCTL(LGUI(S(KC_4))), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_LBRC, KC_TRNS, KC_7, KC_8, KC_9, KC_TRNS, KC_PGUP,
-        KC_LCBR, KC_TRNS, KC_4, KC_5, KC_6, KC_TRNS,
-        KC_LPRN, KC_TRNS, KC_1, KC_2, KC_3, KC_0, KC_PGDN,
+        KC_TRNS, KC_TRNS, LCTL(LGUI(S(KC_3))), LCTL(LGUI(S(KC_4))), KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_7, KC_8, KC_9, KC_TRNS, KC_PGUP,
+        KC_LBRC, KC_LCBR, KC_4, KC_5, KC_6, KC_TRNS,
+        KC_TRNS, KC_LPRN, KC_1, KC_2, KC_3, KC_0, KC_PGDN,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_PGDN, KC_PGUP,
         KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS,
         // right hand
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_RBRC,
-        KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_TRNS, KC_RCBR,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_RPRN,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_RCBR, KC_RBRC,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_RPRN, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_HOME, KC_END,
         KC_TRNS,
