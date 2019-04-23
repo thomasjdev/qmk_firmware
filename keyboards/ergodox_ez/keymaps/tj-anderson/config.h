@@ -1,7 +1,7 @@
 #include "../../config.h"
 
-// #undef DEBOUNCE
-// #define DEBOUNCE 5
+#undef DEBOUNCE
+#define DEBOUNCE 8
 
 // #undef TAPPING_TERM
 // #define TAPPING_TERM 200
